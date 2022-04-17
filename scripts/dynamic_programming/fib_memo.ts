@@ -1,4 +1,4 @@
-function fib(num: number, memo = new Map()): any {
+function fib(num: number, memo = new Map()): number {
   if (memo.has(num)) return memo.get(num)
   if (num <= 2) return 1
   memo.set(num, fib(num - 1, memo) + fib(num - 2, memo))
