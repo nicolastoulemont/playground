@@ -4,10 +4,8 @@ function howSum(target: number, numbers: number[], memo = new Map()): number[] |
   if (target < 0) return null
   for (const num of numbers) {
     const remainder = target - num
-    if (remainder === 0) return [num]
-
     const result = howSum(remainder, numbers, memo)
-    if (result && result.length > 0) {
+    if (result) {
       memo.set(target, [num, ...result])
       return [num, ...result]
     }
