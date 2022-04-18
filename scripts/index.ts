@@ -1,1 +1,1 @@
-export * from './dynamic_programming'
+export * from './template'

@@ -1,4 +1,4 @@
-function gridTraveler(x: number, y: number): number {
+export function gridTravelerTabulation(x: number, y: number): number {
   const grid = Array(x + 1)
     .fill(0)
     .map(() => Array(y + 1).fill(0))
@@ -14,14 +14,4 @@ function gridTraveler(x: number, y: number): number {
   }
 
   return grid[x][y]
-}
-
-export const grid_traveler_tabulation = {
-  fn: () => {
-    console.log(gridTraveler(1, 1))
-    console.log(gridTraveler(2, 3))
-    console.log(gridTraveler(3, 2))
-    console.log(gridTraveler(3, 3))
-    console.log(gridTraveler(18, 18))
-  },
 }
