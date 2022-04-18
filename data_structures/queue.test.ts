@@ -1,5 +1,5 @@
 import { Queue } from './queue'
-import { describe, test, expect } from '../utils'
+import { describe, test, expect } from '~/utils'
 
 describe('Testing Queue', () => {
   test('Queue enqueue and peek', () => {

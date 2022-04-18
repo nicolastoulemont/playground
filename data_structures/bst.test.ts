@@ -1,5 +1,5 @@
 import { BST } from './bst'
-import { describe, test, expect } from '../utils'
+import { describe, test, expect } from '~/utils'
 
 describe('Testing BinaryTree utils', () => {
   test('add', () => {

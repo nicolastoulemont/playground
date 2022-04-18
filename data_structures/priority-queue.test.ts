@@ -1,5 +1,5 @@
 import { PriorityQueue } from './priority-queue'
-import { describe, test, expect } from '../utils'
+import { describe, test, expect } from '~/utils'
 
 interface Item {
   data: string

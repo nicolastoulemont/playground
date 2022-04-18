@@ -1,5 +1,5 @@
 import { lowerBound } from './lowerbound'
-import { test, expect } from '../../../utils'
+import { test, expect } from '~/utils'
 
 test('lowerbound', () => {
   const arr = [1, 2, 3, 5]
