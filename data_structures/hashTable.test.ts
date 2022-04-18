@@ -1,5 +1,5 @@
 import { HashTable } from './hashTable'
-import { describe, test, expect } from '../../utils'
+import { describe, test, expect } from '../utils'
 
 describe('Testing HashTable utils', () => {
   test('Insert', () => {

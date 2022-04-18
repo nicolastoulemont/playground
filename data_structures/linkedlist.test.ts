@@ -1,5 +1,5 @@
 import { LinkedList } from './linkedlist'
-import { describe, test, expect } from '../../utils'
+import { describe, test, expect } from '../utils'
 
 describe('Testing LinkedList', () => {
   test('List insert and get', () => {

@@ -1,5 +1,5 @@
 import { Stack } from './stack'
-import { describe, test, expect } from '../../utils'
+import { describe, test, expect } from '../utils'
 
 describe('Testing Stack', () => {
   test('Stack push and peek', () => {
