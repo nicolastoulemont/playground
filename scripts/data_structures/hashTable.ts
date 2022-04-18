@@ -6,7 +6,7 @@ function hashingFn(string: string, number: number) {
   return sum % number
 }
 
-class HashTable<T> {
+export class HashTable<T> {
   size: number
   storage: Array<Array<[string, T]>>
   constructor(size: number) {
@@ -46,31 +46,4 @@ class HashTable<T> {
       }
     }
   }
-}
-
-function get() {
-  console.log('get')
-  const myHashTable = new HashTable<number>(5)
-  myHashTable.insert('Nicolas', 1)
-  myHashTable.insert('Flora', 2)
-  const val = myHashTable.get('Nicolas')
-  const valTwo = myHashTable.get('Flora')
-  console.log('val', val)
-  console.log('valTwo', valTwo)
-}
-
-function remove() {
-  console.log('remove')
-  const myHashTable = new HashTable<number>(5)
-  myHashTable.insert('Nicolas', 1)
-  myHashTable.remove('Nicolas')
-  const val = myHashTable.get('Nicolas')
-  console.log('val', val)
-}
-
-export const hashTable = {
-  fn: () => {
-    get()
-    remove()
-  },
 }

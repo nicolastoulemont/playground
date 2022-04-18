@@ -1,4 +1,4 @@
-class Queue<T> {
+export class Queue<T> {
   queue: Array<T>
 
   constructor() {
@@ -44,54 +44,4 @@ class Queue<T> {
     queue.enqueue(front as T)
     return queue
   }
-}
-
-function enqueueAndPeek() {
-  console.log('enqueueAndPeek')
-  const queue = new Queue()
-  const item = 'item'
-  queue.enqueue(item)
-  console.log(queue.peek())
-}
-
-function dequeue() {
-  console.log('dequeue')
-  const queue = new Queue()
-  const firstItem = 'firstItem'
-  const secondItem = 'secondItem'
-  queue.enqueue(firstItem)
-  queue.enqueue(secondItem)
-  console.log(queue.dequeue())
-  console.log(queue.peek())
-}
-
-function clearQueue() {
-  console.log('clearQueue')
-  const queue = new Queue()
-  queue.enqueue(1)
-  queue.enqueue(2)
-  queue.enqueue(3)
-  queue.clear()
-  console.log(queue.peek())
-}
-
-function reverseQueue() {
-  console.log('reveseQueue')
-  const queue = new Queue()
-  queue.enqueue(1)
-  queue.enqueue(2)
-  queue.enqueue(3)
-  queue.enqueue(4)
-  console.log(queue.peek())
-  queue.reverse(queue)
-  console.log(queue.peek())
-}
-
-export const queue = {
-  fn: () => {
-    enqueueAndPeek()
-    dequeue()
-    clearQueue()
-    reverseQueue()
-  },
 }

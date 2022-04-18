@@ -9,7 +9,7 @@ class Node<T> {
   }
 }
 
-class BST<T> {
+export class BST<T> {
   root: Node<T> | null
   constructor() {
     this.root = null
@@ -142,59 +142,4 @@ class BST<T> {
       return node
     }
   }
-}
-
-function contain() {
-  console.log('contain')
-  const bst = new BST<number>()
-  bst.add(2)
-  bst.add(5)
-  console.log(bst.contains(3))
-  bst.add(3)
-  console.log(bst.contains(3))
-}
-
-function find() {
-  console.log('find')
-  const bst = new BST<number>()
-  bst.add(3)
-  console.log(bst.find(4))
-  console.log(bst.find(3))
-}
-
-function getMin() {
-  console.log('getMin')
-  const bst = new BST<number>()
-  bst.add(2)
-  bst.add(5)
-  console.log(bst.getMin())
-}
-
-function getMax() {
-  console.log('getMax')
-  const bst = new BST<number>()
-  bst.add(2)
-  bst.add(5)
-  console.log(bst.getMax())
-}
-
-function remove() {
-  console.log('remove')
-  const bst = new BST<number>()
-  bst.add(2)
-  bst.add(1)
-  bst.add(5)
-  bst.add(3)
-  bst.remove(5)
-  console.log(bst.contains(5))
-}
-
-export const bst = {
-  fn: () => {
-    contain()
-    find()
-    getMin()
-    getMax()
-    remove()
-  },
 }
