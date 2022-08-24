@@ -4,7 +4,6 @@
   "description": "",
   "main": "runner.ts",
   "scripts": {
-    "runner": "ts-node runner.ts",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
