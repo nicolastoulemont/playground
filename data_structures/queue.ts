@@ -10,7 +10,7 @@ export class Queue<T> {
   }
 
   dequeue() {
-    if (this.queue.length <= 0) return null
+    if (this.isEmpty()) return null
     return this.queue.pop()
   }
 

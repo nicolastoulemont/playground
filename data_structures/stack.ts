@@ -26,7 +26,7 @@ export class Stack<T> {
   }
 
   clear() {
-    if (this.storage === {}) return
+    if (this.isEmpty()) return
     for (const key in this.storage) {
       delete this.storage[key]
       this.length--
@@ -38,7 +38,7 @@ export class Stack<T> {
   }
 
   print() {
-    if (this.storage === {}) {
+    if (this.isEmpty()) {
       console.log('Empty stack')
     } else {
       for (const key in this.storage) {
