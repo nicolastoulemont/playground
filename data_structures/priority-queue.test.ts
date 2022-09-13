@@ -6,7 +6,7 @@ interface Item {
   priority: number
 }
 
-describe('Testing PriorityQueue', () => {
+describe('PriorityQueue', () => {
   test('Queue enqueue and peek', () => {
     const pq = new PriorityQueue<Item>()
     const item = { data: 'First', priority: 1 }

@@ -1,7 +1,7 @@
 import { Queue } from './queue'
 import { describe, test, expect } from '~/utils'
 
-describe('Testing Queue', () => {
+describe('Queue', () => {
   test('Queue enqueue and peek', () => {
     const queue = new Queue()
     const item = 'item'

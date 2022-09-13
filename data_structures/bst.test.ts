@@ -1,7 +1,7 @@
 import { BST } from './bst'
 import { describe, test, expect } from '~/utils'
 
-describe('Testing BinaryTree utils', () => {
+describe('BinaryTree', () => {
   test('add', () => {
     const bst = new BST<number>()
     bst.add(2)

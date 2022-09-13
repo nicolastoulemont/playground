@@ -1,7 +1,7 @@
 import { Tree } from './tree'
 import { describe, test, expect } from '~/utils'
 
-describe('Testing Tree', () => {
+describe('Tree', () => {
   const tree = new Tree()
   tree.set({ name: 'root', children: [] })
   tree.set(

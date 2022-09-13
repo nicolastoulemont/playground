@@ -1,7 +1,7 @@
 import { HashTable } from './hashTable'
 import { describe, test, expect } from '~/utils'
 
-describe('Testing HashTable utils', () => {
+describe('HashTable', () => {
   test('Insert', () => {
     const myHashTable = new HashTable<number>(5)
     myHashTable.insert('Nicolas', 1)

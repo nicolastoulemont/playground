@@ -1,5 +1,5 @@
 class Node<T> {
-  data: T
+  data: T | null
   next: Node<T> | null | undefined
   constructor(data: T, next: Node<T> | null = null) {
     this.data = data
@@ -69,22 +69,27 @@ export class LinkedList<T> {
     return this.head
   }
 
-  getAt(index: number): Node<T> | null {
-    let current = this.head
-    let count = 0
+  private *traverse(node = this.head): Iterable<Node<T>> {
+    if (!node) return
+    yield node
+    if (node.next) {
+      yield* this.traverse(node.next)
+    }
+  }
 
-    while (current) {
-      if (count === index) {
-        return current
+  getAt(targetIndex: number): Node<T> | null {
+    let index = 0
+    for (const node of this.traverse()) {
+      if (index === targetIndex) {
+        return node
       }
-      count++
-      current = current.next
+      index++
     }
     return null
   }
 
-  removeAt(index: number) {
-    if (index > this.size || index < 0) {
+  removeAt(targetIndex: number) {
+    if (targetIndex > this.size || targetIndex < 0) {
       return
     }
 
@@ -92,14 +97,15 @@ export class LinkedList<T> {
     let previous
     let count = 0
 
-    if (index === 0) {
+    if (targetIndex === 0) {
       this.head = current?.next
     } else {
-      while (count < index) {
+      while (count < targetIndex) {
         previous = current
         count++
         current = current?.next
       }
+
       if (previous) {
         previous.next = current?.next
       }
@@ -108,40 +114,27 @@ export class LinkedList<T> {
   }
 
   clearList() {
-    const recurseDelete = (data: Node<T> | null | undefined) => {
-      if (data === null || data === undefined) {
-        return
-      } else {
-        recurseDelete(data.next)
-        data = null
-        this.size--
-      }
+    for (const node of this.traverse()) {
+      node.data = null
+      node.next = null
     }
-
-    recurseDelete(this.head)
-
-    if (this.size === 0) {
-      return true
-    } else {
-      return false
-    }
+    this.head = null
+    this.size = 0
   }
 
-  getListAsArray(): Array<T> {
-    let current = this.head
-    let arr: Array<T> = []
-    while (current) {
-      arr.push(current.data)
-      current = current.next
+  getListAsArray(): Array<T | null> {
+    let arr: Array<T | null> = []
+    let index = 0
+    for (const node of this.traverse()) {
+      arr[index] = node.data
+      index++
     }
     return arr
   }
 
   printList() {
-    let current = this.head
-    while (current) {
-      console.log(JSON.stringify(current.data, null, 2))
-      current = current.next
+    for (const node of this.traverse()) {
+      console.log(JSON.stringify(node, null, 2))
     }
   }
 }

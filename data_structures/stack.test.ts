@@ -1,7 +1,7 @@
 import { Stack } from './stack'
 import { describe, test, expect } from '~/utils'
 
-describe('Testing Stack', () => {
+describe('Stack', () => {
   test('Stack push and peek', () => {
     const stack = new Stack()
     const item = 'item'

@@ -13,12 +13,12 @@ export class Tree {
     this.root = null
   }
 
-  private *traverseTree(node = this.root): Iterable<Node> {
+  private *traverse(node = this.root): Iterable<Node> {
     if (!node) return
     yield node
     if (node.children.length) {
       for (let child of node.children) {
-        yield* this.traverseTree(child)
+        yield* this.traverse(child)
       }
     }
   }
@@ -33,7 +33,7 @@ export class Tree {
       throw new Error('parentNodeName is required once the tree is initialized')
     }
 
-    for (const treeNode of this.traverseTree()) {
+    for (const treeNode of this.traverse()) {
       if (treeNode.name === parentNodeName) {
         treeNode.children.push(node)
         break
@@ -44,7 +44,7 @@ export class Tree {
   get(nodeName: string): Node[] | null {
     if (this.root === null) return null
     const results: Node[] = []
-    for (const node of this.traverseTree()) {
+    for (const node of this.traverse()) {
       if (node.name === nodeName) {
         results.push(node)
       }
@@ -56,7 +56,7 @@ export class Tree {
   update(nodeName: string, updatedNode: Partial<Node>) {
     if (this.root === null) return false
     let updated = false
-    for (const node of this.traverseTree()) {
+    for (const node of this.traverse()) {
       if (node.name === nodeName) {
         Object.assign(node, updatedNode)
         updated = true
@@ -69,7 +69,7 @@ export class Tree {
   remove(nodeName: string): { removed: boolean; numberOfNodeRemoved: number } {
     if (!this.root) return { removed: false, numberOfNodeRemoved: 0 }
     let removed: number = 0
-    for (const node of this.traverseTree()) {
+    for (const node of this.traverse()) {
       const foundChildNode = node.children.find(({ name }) => name === nodeName)
       if (foundChildNode) {
         node.children = node.children.filter(({ name }) => name !== nodeName)
