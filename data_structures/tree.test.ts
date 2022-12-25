@@ -15,9 +15,6 @@ describe('Tree', () => {
     'root'
   )
   tree.set({ name: '2', children: [{ name: '2-1', children: [] }] }, 'root')
-  test.skip('print', () => {
-    tree.print()
-  })
   test('get', () => {
     const result = tree.get('1-1-1')
     expect(result).toStrictEqual([{ name: '1-1-1', children: [] }])
@@ -39,5 +36,10 @@ describe('Tree', () => {
         ],
       },
     ])
-  })
+  }),
+    test('traverse', () => {
+      for (const node of tree.traverse()) {
+        console.log(JSON.stringify(node, null, 2))
+      }
+    })
 })
