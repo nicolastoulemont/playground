@@ -19,7 +19,7 @@ export class Tree {
     if (!node) return
     yield node
     if (node.children.length) {
-      for (let child of node.children) {
+      for (const child of node.children) {
         yield* this.traverse(child)
       }
     }

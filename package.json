@@ -5,6 +5,7 @@
   "main": "runner.ts",
   "scripts": {
     "test": "vitest",
+    "test:watch": "vitest watch",
     "coverage": "vitest run --coverage"
   },
   "author": "ntoulemont",

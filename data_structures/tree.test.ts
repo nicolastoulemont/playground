@@ -37,7 +37,7 @@ describe('Tree', () => {
       },
     ])
   }),
-    test('traverse', () => {
+    test.skip('traverse', () => {
       for (const node of tree.traverse()) {
         console.log(JSON.stringify(node, null, 2))
       }

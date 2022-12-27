@@ -15,43 +15,33 @@ export class BST<T> {
     this.root = null
   }
 
-  searchTree(node: Node<T>, value: T): void | null {
-    // Iterate left
-    if (value < node.value) {
-      if (node.left === null) {
-        node.left = new Node(value)
-        return
-      }
-      return this.searchTree(node.left, value)
-    } else if (value > node.value) {
-      // Iterate Right
-      if (node.right === null) {
-        node.right = new Node(value)
-        return
-      }
-      return this.searchTree(node.right, value)
-    } else {
-      return null
-    }
-  }
-
-  inOrderTraverse(cb: (node: Node<T>) => void) {
-    this.inOrderTraverseNode(this.root, cb)
-  }
-
-  inOrderTraverseNode(node: Node<T> | null, cb: (node: Node<T>) => void) {
-    if (!node) return
-    this.inOrderTraverseNode(node.left, cb)
-    cb(node)
-    this.inOrderTraverseNode(node.right, cb)
-  }
-
-  add(value: T) {
+  set(value: T) {
     if (this.root === null) {
       this.root = new Node(value)
       return
     }
-    return this.searchTree(this.root as Node<T>, value)
+
+    function insert(node: Node<T>, value: T): void | null {
+      // Iterate left
+      if (value < node.value) {
+        if (node.left === null) {
+          node.left = new Node(value)
+          return
+        }
+        return insert(node.left, value)
+      } else if (value > node.value) {
+        // Iterate Right
+        if (node.right === null) {
+          node.right = new Node(value)
+          return
+        }
+        return insert(node.right, value)
+      } else {
+        return null
+      }
+    }
+
+    return insert(this.root as Node<T>, value)
   }
 
   getMin() {
@@ -89,57 +79,52 @@ export class BST<T> {
 
   remove(value: T) {
     if (!this.root) {
-      return 'Tree is empty'
-    } else {
-      return this.searchAndRemove(this.root, value)
+      throw new Error('The tree is empty')
     }
-  }
 
-  findMin(root: Node<T>): Node<T> {
-    return !root.left ? root : this.findMin(root.left)
-  }
-
-  findMax(root: Node<T>): Node<T> {
-    return !root.right ? root : this.findMax(root.right)
-  }
-
-  searchAndRemove(node: Node<T> | null, value: T) {
-    if (!node) return null
-
-    if (value < node.value) {
-      node.left = this.searchAndRemove(node.left, value)
-      return node
-    } else if (value > node.value) {
-      node.right = this.searchAndRemove(node.right, value)
-      return node
-    } else {
-      // value === node.value
-      // No children
-      if (!node.left && !node.right) {
-        node = null
-        return node
-      }
-      // No left children
-      if (!node.left) {
-        node = node.right
-        return node
-      }
-      // No right children
-      if (!node.right) {
-        node = node.left
-        return node
-      }
-      // Node has two children
-      if (node.right) {
-        // Find min node on the right
-        let minNode = this.findMin(node.right)
-        // Replace node value with min node value
-        node.value = minNode.value
-        // Remove the min node
-        node.right = this.searchAndRemove(node.right, minNode.value)
-      }
-
-      return node
+    function findMin(root: Node<T>): Node<T> {
+      return !root.left ? root : findMin(root.left)
     }
+
+    function deleteNode(node: Node<T> | null, value: T) {
+      if (!node) return null
+
+      if (value < node.value) {
+        node.left = deleteNode(node.left, value)
+        return node
+      } else if (value > node.value) {
+        node.right = deleteNode(node.right, value)
+        return node
+      } else {
+        // value === node.value
+        // No children
+        if (!node.left && !node.right) {
+          node = null
+          return node
+        }
+        // No left children
+        if (!node.left) {
+          node = node.right
+          return node
+        }
+        // No right children
+        if (!node.right) {
+          node = node.left
+          return node
+        }
+        // Node has two children
+        if (node.right) {
+          // Find min node on the right
+          let minNode = findMin(node.right)
+          // Replace node value with min node value
+          node.value = minNode.value
+          // Remove the min node
+          node.right = deleteNode(node.right, minNode.value)
+        }
+
+        return node
+      }
+    }
+    return deleteNode(this.root, value)
   }
 }
