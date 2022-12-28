@@ -1,20 +1,30 @@
-type Listener<Event> = (event: Event) => void
+type Listener<T> = (T: T) => void
 
-export function createObserver<Event>(): {
-  subscribe: (listener: Listener<Event>) => () => void
-  publish: (event: Event) => void
-  listeners: Listener<Event>[]
+export function createObserver<T>(): {
+  subscribe: (listener: Listener<T>) => [() => T | undefined, (T: T) => void, () => void]
+  set: (T: T) => void
+  get: () => T | undefined
+  listeners: Set<Listener<T>>
 } {
-  const listeners: Listener<Event>[] = []
+  let value: T | undefined = undefined
+  const listeners: Set<Listener<T>> = new Set()
   return {
-    subscribe: (listener: Listener<Event>) => {
-      listeners.push(listener)
-      return () => {
-        listeners.splice(listeners.indexOf(listener), 1)
-      }
+    subscribe(listener: Listener<T>) {
+      listeners.add(listener)
+      return [
+        this.get,
+        this.set,
+        () => {
+          listeners.delete(listener)
+        },
+      ]
     },
-    publish: (event: Event) => {
-      listeners.forEach((listener) => listener(event))
+    set(T: T) {
+      value = T
+      listeners.forEach((listener) => listener(T))
+    },
+    get() {
+      return value
     },
     listeners: listeners,
   }

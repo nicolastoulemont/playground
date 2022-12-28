@@ -5,13 +5,23 @@ describe('Observer', () => {
   test('subscribe', () => {
     const observer = createObserver()
     observer.subscribe((e) => console.log(e))
-    expect(observer.listeners.length).toBe(1)
+    expect(observer.listeners.size).toBe(1)
   })
   test('unsubscribe', () => {
     const observer = createObserver()
-    const unsubscribe = observer.subscribe((e) => console.log(e))
-    expect(observer.listeners.length).toBe(1)
+    const [_, __, unsubscribe] = observer.subscribe((e) => console.log(e))
+    expect(observer.listeners.size).toBe(1)
     unsubscribe()
-    expect(observer.listeners.length).toBe(0)
+    expect(observer.listeners.size).toBe(0)
+  })
+  test('set and get', () => {
+    const observer = createObserver<number>()
+
+    const [get, set] = observer.subscribe((v) => console.log(v))
+
+    set(1)
+    expect(get()).toBe(1)
+    set(2)
+    expect(get()).toBe(2)
   })
 })
