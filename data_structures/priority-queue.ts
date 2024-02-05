@@ -11,13 +11,20 @@ export class PriorityQueue<Element extends BaseElement> {
 
   enqueue(element: Element) {
     // Empty Queue or Queue last elem prio <= elem prio => insert item at the end of the array
-    if (this.queue.length === 0 || this.queue[this.queue.length - 1].priority <= element.priority) {
+    if (
+      this.queue.length === 0 ||
+      this.queue[this.queue.length - 1].priority <= element.priority
+    ) {
       this.queue.push(element)
       return
     }
 
     // Need to find the correct insertion index given the element priority
-    const insertionIndex = lowerBound(this.queue, element, (a: Element, b: Element) => a.priority - b.priority)
+    const insertionIndex = lowerBound(
+      this.queue,
+      element,
+      (a: Element, b: Element) => a.priority - b.priority
+    )
     this.queue.splice(insertionIndex, 0, element)
   }
 
@@ -43,7 +50,9 @@ export class PriorityQueue<Element extends BaseElement> {
     if (this.isEmpty()) {
       console.log('Empty Queue')
     } else {
-      this.queue.forEach((item, index) => console.log(`${index} : ${JSON.stringify(item, undefined, 2)}`))
+      this.queue.forEach((item, index) =>
+        console.log(`${index} : ${JSON.stringify(item, undefined, 2)}`)
+      )
     }
   }
 
