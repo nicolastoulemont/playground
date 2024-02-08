@@ -1,6 +1,6 @@
-import { type RouteConfigUnion } from './router'
+import { type RouteConfig } from './router'
 
-type ComponentProps = RouteConfigUnion & {
+type ComponentProps = RouteConfig & {
   name: string
 }
 

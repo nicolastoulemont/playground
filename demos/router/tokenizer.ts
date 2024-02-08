@@ -14,12 +14,24 @@ export type Token = {
 }
 
 /**
+ * Normalize paths to the Dot delimiter pattern
  * Docs:
  * - Folder org: https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization
  * - Dot delimiter: https://remix.run/docs/en/main/file-conventions/routes#dot-delimiters
- * Normalize paths to the Dot delimiter pattern
+ *
+ * Normalize React router path pattern (from the RouteManifest) to Remix file name pattern
+ * Docs:
+ * - Remix config routes definition: https://remix.run/docs/en/main/file-conventions/remix-config#routes
+ *
  */
-const normalizeDelimiterPattern = (filePath: string) => filePath.replaceAll('/', '.')
+const normalizeFilePath = (filePath: string) =>
+  filePath
+    // Dot delimiter
+    .replaceAll('/', '.')
+    // Glob "*"" to splat character "$"
+    .replaceAll('*', '$')
+    // Dynamic param
+    .replaceAll(':', '$')
 
 /**
  * Docs: https://remix.run/docs/en/main/file-conventions/routes#folders-for-organization
@@ -41,7 +53,7 @@ const toTokens = (path: string): Token[] =>
  * Transform the route files name into path tokens based on the "dot delimiters" file name convention of Remix.
  */
 export function tokenizer(rawFilePath: string): Token[] {
-  const filePath = normalizeDelimiterPattern(rawFilePath)
+  const filePath = normalizeFilePath(rawFilePath)
   const [path] = getPath(filePath)
 
   if (!ESCAPE_PATTERN.test(path)) {

@@ -9,6 +9,10 @@ type TestCase = {
 
 const testCases: TestCase[] = [
   {
+    tokens: [{ value: '$', tokenType: TokenType.Regular }],
+    expectedResults: [{ value: '/${string}', segmentType: SegmentType.Splat }],
+  },
+  {
     tokens: [
       { value: '($lang)', tokenType: TokenType.Regular },
       { value: '$productId', tokenType: TokenType.Regular },

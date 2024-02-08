@@ -1,14 +1,15 @@
 import { parser } from './parser'
-import { getRoutesFileName } from './getRoutesFileName'
+import { PathSources, getRoutesPaths } from './getRoutesPaths'
 import { typeEmitter } from './typeEmitter'
 import { computeType } from './computeType'
+import path from 'path'
+import { routeManifestExample } from './routeManifest.example'
 
-export async function main() {
-  await typeEmitter(computeType(parser(await getRoutesFileName('routes'))))
+export async function main(pathSources: PathSources) {
+  await typeEmitter(computeType(parser(await getRoutesPaths(pathSources))))
 }
 
-main()
-
-/**
- * Rework to remove one loop
- */
+main({
+  routesDirPath: path.join(__dirname, 'routes'),
+  routeManifest: routeManifestExample,
+})

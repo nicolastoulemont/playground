@@ -1,12 +1,19 @@
 import { describe, test, expect } from '~/utils'
 import { TokenType, tokenizer } from '../tokenizer'
-import { getRoutesFileName } from '../getRoutesFileName'
+import { getRoutesPaths } from '../getRoutesPaths'
+import { routeManifestExample } from '../routeManifest.example'
+
+import path from 'path'
 
 describe('Router file type generation: tokenize', () => {
   test('tokenize file paths', async () => {
-    const filePaths = await getRoutesFileName('routes')
+    const filePaths = await getRoutesPaths({
+      routesDirPath: path.join(__dirname, '../routes'),
+      routeManifest: routeManifestExample,
+    })
     const tokens = filePaths.map(tokenizer)
     expect(tokens).toEqual([
+      [{ value: '$', tokenType: TokenType.Regular }],
       [
         { value: '($lang)', tokenType: TokenType.Regular },
         { value: '$productId', tokenType: TokenType.Regular },
@@ -58,6 +65,21 @@ describe('Router file type generation: tokenize', () => {
       [
         { value: 'weird-url', tokenType: TokenType.Regular },
         { value: '_index', tokenType: TokenType.Escaped },
+      ],
+      [
+        { value: 'some', tokenType: TokenType.Regular },
+        { value: 'path', tokenType: TokenType.Regular },
+        { value: '$', tokenType: TokenType.Regular },
+      ],
+      [
+        { value: 'some', tokenType: TokenType.Regular },
+        { value: '$path', tokenType: TokenType.Regular },
+      ],
+      [
+        { value: 'some', tokenType: TokenType.Regular },
+        { value: '$path', tokenType: TokenType.Regular },
+        { value: 'relative', tokenType: TokenType.Regular },
+        { value: 'path', tokenType: TokenType.Regular },
       ],
     ])
   })
