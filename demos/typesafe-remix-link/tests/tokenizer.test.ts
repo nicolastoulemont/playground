@@ -1,14 +1,14 @@
 import { describe, test, expect } from '~/utils'
-import { TokenType, tokenizer } from '../tokenizer'
-import { getRoutesPaths } from '../getRoutesPaths'
-import { routeManifestExample } from '../routeManifest.example'
+import { TokenType, tokenizer } from '../src/tokenizer'
+import { getRoutesPaths } from '../src/getRoutesPaths'
+import { routeManifestExample } from '../assets/routeManifest.example'
 
 import path from 'path'
 
 describe('Router file type generation: tokenize', () => {
   test('tokenize file paths', async () => {
     const filePaths = await getRoutesPaths({
-      routesDirPath: path.join(__dirname, '../routes'),
+      routesDirPath: path.join(__dirname, '../assets/routes'),
       routeManifest: routeManifestExample,
     })
     const tokens = filePaths.map(tokenizer)

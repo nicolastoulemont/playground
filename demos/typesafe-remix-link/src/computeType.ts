@@ -45,13 +45,13 @@ const getRoutePathString = (segments: Segment[]) =>
     : `"${joinSegments(segments)}"`
 
 export function computeType(routesSegments: ParsedSegments) {
-  const routesConfig: { path: string; params?: string[] }[] = []
+  const routesTypeConfig: TypeConfig[] = []
 
   for (const routeSegments of routesSegments) {
     if (!hasOptionalSegments(routeSegments)) {
       const path = getRoutePathString(routeSegments)
 
-      routesConfig.push({
+      routesTypeConfig.push({
         path,
         ...(hasParams(routeSegments) && {
           params: getParams(routeSegments),
@@ -65,14 +65,14 @@ export function computeType(routesSegments: ParsedSegments) {
       const allSegmentsRoutePath = getRoutePathString(routeSegments)
       const noOptionalSegmentsRoutePath = getRoutePathString(requiredRouteSegments)
 
-      routesConfig.push({
+      routesTypeConfig.push({
         path: allSegmentsRoutePath,
         ...(hasParams(routeSegments) && {
           params: getParams(routeSegments),
         }),
       })
 
-      routesConfig.push({
+      routesTypeConfig.push({
         path: noOptionalSegmentsRoutePath,
         ...(hasParams(requiredRouteSegments) && {
           params: getParams(requiredRouteSegments),
@@ -80,11 +80,11 @@ export function computeType(routesSegments: ParsedSegments) {
       })
     }
   }
-  const rawRouteConfigType = `export type RawRouteConfig = ${routesConfig
+  const rawRouteConfigType = `export type RawRouteConfig = ${routesTypeConfig
     .map(configToTypeString)
     .join('|')}`
 
-  const routeConfigType = `export type RouteConfig = ${routesConfig
+  const routeConfigType = `export type RouteConfig = ${routesTypeConfig
     .filter(removeCatchAllType)
     .map(configToTypeString)
     .join('|')}`

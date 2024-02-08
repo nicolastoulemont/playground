@@ -1,6 +1,6 @@
 import { describe, test, expect } from '~/utils'
-import { Segment, SegmentType, converter } from '../converter'
-import { Token, TokenType } from '../tokenizer'
+import { Segment, SegmentType, converter } from '../src/converter'
+import { Token, TokenType } from '../src/tokenizer'
 
 type TestCase = {
   tokens: Token[]

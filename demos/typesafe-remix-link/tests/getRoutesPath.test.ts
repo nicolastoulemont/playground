@@ -1,11 +1,11 @@
 import { describe, test, expect } from '~/utils'
-import { getRouteManifestFilePaths, getRoutesFilePaths } from '../getRoutesPaths'
-import { routeManifestExample } from '../routeManifest.example'
+import { getRouteManifestFilePaths, getRoutesFilePaths } from '../src/getRoutesPaths'
+import { routeManifestExample } from '../assets/routeManifest.example'
 import path from 'path'
 
 describe('Router paths gathering fns', () => {
   test('Get file based paths', async () => {
-    const filePaths = await getRoutesFilePaths(path.join(__dirname, '../routes'))
+    const filePaths = await getRoutesFilePaths(path.join(__dirname, '../assets/routes'))
     expect(filePaths).toEqual([
       '$.tsx',
       '($lang).$productId.tsx',
